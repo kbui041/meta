@@ -1,16 +1,15 @@
-<!-- templates/bookings/add_review.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add Review for {{ hotel.name }}</title>
+    <title>Add Review</title>
 </head>
 <body>
-    <h1>Add Review for {{ hotel.name }}</h1>
+    <h1>Add a Review for {{ hotel.name }}</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Submit Review</button>
+        <button type="submit">Submit</button>
     </form>
 </body>
 </html>

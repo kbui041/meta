@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Home</title>
+    <meta charset="UTF-8">
+    <title>Hotel Booking System</title>
 </head>
 <body>
     <h1>Welcome to the Hotel Booking System</h1>
     <p>This is the home page.</p>
-    
-
+    <ul>
+        <li><a href="{% url 'hotel_list' %}">Hotel List</a></li>
+        <li><a href="{% url 'room_list' %}">Room List</a></li>
+        <li><a href="{% url 'booking_list' %}">Booking List</a></li>
+        <li><a href="{% url 'review_list' %}">Review List</a></li>
+    </ul>
 </body>
 </html>

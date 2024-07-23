@@ -1,17 +1,15 @@
-# bookings/urls.py
-
 from django.urls import path
+from .views import home, hotel_list, hotel_detail, room_list, room_detail, booking_list, booking_detail, review_list
 from . import views
-from . import views_api
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('hotels/', views_api.HotelListCreate.as_view(), name='api_hotel_list_create'),
-    path('hotels/<int:pk>/', views_api.HotelDetail.as_view(), name='api_hotel_detail'),
-    path('rooms/', views_api.RoomListCreate.as_view(), name='api_room_list_create'),
-    path('rooms/<int:pk>/', views_api.RoomDetail.as_view(), name='api_room_detail'),
-    path('bookings/', views_api.BookingListCreate.as_view(), name='api_booking_list_create'),
-    path('bookings/<int:pk>/', views_api.BookingDetail.as_view(), name='api_booking_detail'),
-    path('reviews/', views_api.ReviewListCreate.as_view(), name='api_review_list_create'),
-    path('reviews/<int:pk>/', views_api.ReviewDetail.as_view(), name='api_review_detail'),
+    path('', home, name='home'),
+    path('hotels/', hotel_list, name='hotel_list'),
+    path('hotels/<int:hotel_id>/', hotel_detail, name='hotel_detail'),
+    path('rooms/', room_list, name='room_list'),
+    path('rooms/<int:room_id>/', room_detail, name='room_detail'),
+    path('bookings/', booking_list, name='booking_list'),
+    path('bookings/<int:booking_id>/', booking_detail, name='booking_detail'),
+    path('reviews/', review_list, name='review_list'),
+    path('hotels/<int:hotel_id>/add_review/', views.add_review, name = 'add_review')
 ]

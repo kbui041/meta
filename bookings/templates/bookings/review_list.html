@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Review List</title>
+</head>
+<body>
+    <h1>Review List</h1>
+    <ul>
+        {% for review in reviews %}
+            <li>
+                <strong>Hotel:</strong> {{ review.hotel.name }}<br>
+                <strong>Customer:</strong> {{ review.customer.user.username }}<br>
+                <strong>Rating:</strong> {{ review.rating }}<br>
+                <strong>Comment:</strong> {{ review.comment }}<br>
+                <strong>Date:</strong> {{ review.created_at }}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
