@@ -1,11 +1,9 @@
-# bookings/urls.py
+# bookings/urls_api.py
 
 from django.urls import path
-from . import views
 from . import views_api
 
 urlpatterns = [
-    path('', views.home, name='home'),
     path('hotels/', views_api.HotelListCreate.as_view(), name='api_hotel_list_create'),
     path('hotels/<int:pk>/', views_api.HotelDetail.as_view(), name='api_hotel_detail'),
     path('rooms/', views_api.RoomListCreate.as_view(), name='api_room_list_create'),
