@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hotel List</title>
+</head>
+<body>
+    <h1>Hotel List</h1>
+    <ul>
+        {% for hotel in hotels %}
+            <li><a href="{% url 'hotel_detail' hotel.id %}">{{ hotel.name }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

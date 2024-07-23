@@ -1,0 +1,32 @@
+<!-- templates/bookings/hotel_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ hotel.name }}</title>
+</head>
+<body>
+    <h1>{{ hotel.name }}</h1>
+    <p>Address: {{ hotel.address }}</p>
+    <p>Category: {{ hotel.category.name }}</p>
+    <p>Description: {{ hotel.description }}</p>
+
+    <h2>Rooms</h2>
+    <ul>
+        {% for room in hotel.room_set.all %}
+            <li>
+                <a href="{% url 'room_detail' room.id %}">{{ room.room_type }}</a> - ${{ room.price }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Reviews</h2>
+    <ul>
+        {% for review in hotel.review_set.all %}
+            <li>{{ review.user.username }}: {{ review.comment }} ({{ review.rating }}/5)</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'add_review' hotel.id %}">Add a review</a> <!-- Link to add review page -->
+</body>
+</html>
