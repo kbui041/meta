@@ -25,7 +25,8 @@ def hotel_list(request):
 
 def hotel_detail(request, hotel_id):
     hotel = get_object_or_404(Hotel, pk=hotel_id)
-    return render(request, 'bookings/hotel_detail.html', {'hotel': hotel})
+    rooms = Room.objects.filter(hotel=hotel)
+    return render(request, 'bookings/hotel_detail.html', {'hotel': hotel, 'rooms': rooms})
 
 def room_list(request):
     rooms = Room.objects.all()

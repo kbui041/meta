@@ -1,4 +1,3 @@
-<!-- templates/bookings/hotel_detail.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,16 +6,22 @@
 </head>
 <body>
     <h1>{{ hotel.name }}</h1>
-    <p>Address: {{ hotel.address }}</p>
-    <p>Category: {{ hotel.category.name }}</p>
-    <p>Description: {{ hotel.description }}</p>
+    <p>{{ hotel.description|default:"No description available" }}</p>
+    <p>{{ hotel.address }}</p>
+    {% comment %} <p> 
+        {% if hotel.city %}{{ hotel.city }}{% endif %}
+        {% if hotel.state %}, {{ hotel.state }}{% endif %}
+        {% if hotel.country %}, {{ hotel.country }}{% endif %}
+    </p>
+    <p>{% if hotel.phone_number %}{{ hotel.phone_number }}{% endif %}</p>
+    <p>{% if hotel.email %}{{ hotel.email }}{% endif %}</p>{% endcomment %}
 
     <h2>Rooms</h2>
     <ul>
-        {% for room in hotel.room_set.all %}
-            <li>
-                <a href="{% url 'room_detail' room.id %}">{{ room.room_type }}</a> - ${{ room.price }}
-            </li>
+        {% for room in rooms %}
+            <li>{{ room.name }} - {{ room.price }}</li>
+        {% empty %}
+            <li>No rooms available</li>
         {% endfor %}
     </ul>
 
@@ -24,9 +29,11 @@
     <ul>
         {% for review in hotel.review_set.all %}
             <li>{{ review.user.username }}: {{ review.comment }} ({{ review.rating }}/5)</li>
+        {% empty %}
+            <li>No reviews available</li>
         {% endfor %}
     </ul>
-
-    <a href="{% url 'add_review' hotel.id %}">Add a review</a> <!-- Link to add review page -->
+    
+    <a href="{% url 'add_review' hotel.id %}">Add a review</a>
 </body>
 </html>
