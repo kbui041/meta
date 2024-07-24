@@ -8,13 +8,14 @@
     <h1>Review List</h1>
     <ul>
         {% for review in reviews %}
-            <li>
-                <strong>Hotel:</strong> {{ review.hotel.name }}<br>
-                <strong>Customer:</strong> {{ review.customer.user.username }}<br>
-                <strong>Rating:</strong> {{ review.rating }}<br>
-                <strong>Comment:</strong> {{ review.comment }}<br>
-                <strong>Date:</strong> {{ review.created_at }}
-            </li>
+        <li>
+            <strong>Hotel:</strong> {{ review.hotel.name }}<br>
+            <strong>Customer:</strong> {{ review.customer.user.username }}<br>
+            <strong>Rating:</strong> {{ review.rating }}<br>
+            <strong>Comment:</strong> {{ review.comment }}<br>
+        </li>
+        {% empty %}
+        <li>No reviews available</li>
         {% endfor %}
     </ul>
 </body>

@@ -7,33 +7,33 @@
 <body>
     <h1>{{ hotel.name }}</h1>
     <p>{{ hotel.description|default:"No description available" }}</p>
-    <p>{{ hotel.address }}</p>
-    {% comment %} <p> 
-        {% if hotel.city %}{{ hotel.city }}{% endif %}
-        {% if hotel.state %}, {{ hotel.state }}{% endif %}
-        {% if hotel.country %}, {{ hotel.country }}{% endif %}
-    </p>
-    <p>{% if hotel.phone_number %}{{ hotel.phone_number }}{% endif %}</p>
-    <p>{% if hotel.email %}{{ hotel.email }}{% endif %}</p>{% endcomment %}
+
 
     <h2>Rooms</h2>
     <ul>
         {% for room in rooms %}
-            <li>{{ room.name }} - {{ room.price }}</li>
+        <li><a href="{% url 'room_detail' room.id %}">{{ room.name|default:"No description available" }} - {{ room.price }}</a></li>
         {% empty %}
-            <li>No rooms available</li>
+        <li>No rooms available</li>
         {% endfor %}
     </ul>
 
+    <h2>Contact Information</h2>
+    <p><strong>Phone:</strong> {{ hotel.phone_number }}</p>
+    <p><strong>Email:</strong> {{ hotel.email }}</p>
+    <p><strong>Address:</strong> {{hotel.address}}</p>
+
     <h2>Reviews</h2>
     <ul>
-        {% for review in hotel.review_set.all %}
-            <li>{{ review.user.username }}: {{ review.comment }} ({{ review.rating }}/5)</li>
+        {% for review in reviews %}
+        <li>
+            <strong>{{ review.customer.user.username }}:</strong> {{ review.comment }} ({{ review.rating }}/5)
+        </li>
         {% empty %}
-            <li>No reviews available</li>
+        <li>No reviews available</li>
         {% endfor %}
     </ul>
-    
+
     <a href="{% url 'add_review' hotel.id %}">Add a review</a>
 </body>
 </html>

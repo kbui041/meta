@@ -3,9 +3,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone = models.CharField(max_length=15)
+    phone = models.CharField(max_length=20)
     address = models.CharField(max_length=255)
     email = models.EmailField(default = 'default@example.com')
     first_name = models.CharField(max_length=50, default = 'Default First Name')
@@ -27,7 +28,7 @@ class Hotel(models.Model):
     city = models.CharField(max_length=100, default='Default City')
     state = models.CharField(max_length=100, default='Default State')
     country = models.CharField(max_length=100, default='Default Country')
-    phone_number = models.CharField(max_length=15, default='000-000-0000')
+    phone_number = models.CharField(max_length=20, default='000-000-0000')
     email = models.EmailField(default='default@example.com')
     category = models.ForeignKey(HotelCategory, on_delete=models.SET_NULL, null=True)
 

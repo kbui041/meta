@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Booking {{ booking.id }}</title>
 </head>
 <body>
     <h1>Booking {{ booking.id }}</h1>
     <p>Customer: {{ booking.customer.user.username }}</p>
-    <p>Room: {{ booking.room.room_type }}</p>
+    <p>Room: {{ booking.room.description }}</p>
     <p>Check-in: {{ booking.check_in }}</p>
     <p>Check-out: {{ booking.check_out }}</p>
     <p>Total Price: {{ booking.total_price }}</p>

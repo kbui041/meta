@@ -8,7 +8,17 @@
     <h1>Bookings</h1>
     <ul>
         {% for booking in bookings %}
-        <li>{{ booking.room.name }} - {{ booking.customer }}</li>
+        <li>
+            <strong>Customer:</strong> {{ booking.customer.user.username }}<br>
+            <strong>Phone:</strong> {{ booking.customer.phone }}<br>
+            <strong>Email:</strong> {{ booking.customer.email }}<br>
+            <strong>Room:</strong> {{ booking.room.description }}<br>
+            <strong>Check-in:</strong> {{ booking.check_in }}<br>
+            <strong>Check-out:</strong> {{ booking.check_out }}<br>
+            <strong>Total Price:</strong> {{ booking.total_price }}<br>
+        </li>
+        {% empty %}
+        <li>No bookings available</li>
         {% endfor %}
     </ul>
 </body>
