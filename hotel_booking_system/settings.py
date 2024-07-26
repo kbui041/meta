@@ -47,6 +47,8 @@ INSTALLED_APPS = [
 
 # hotel_booking_system/settings.py
 
+# settings.py
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -55,8 +57,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'hotel_booking_system.middleware.FaviconMiddleware',
     'hotel_booking_system.middleware.LoggingMiddleware',
     'hotel_booking_system.middleware.AuthenticationMiddleware',
+    'hotel_booking_system.middleware.JsonResponseMiddleware',
 ]
 
 ROOT_URLCONF = 'hotel_booking_system.urls'
