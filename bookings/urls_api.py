@@ -10,5 +10,5 @@ router.register(r'reviews', ReviewViewSet)
 router.register(r'customers', CustomerViewSet)
 
 urlpatterns = [
-    path('api/', include(router.urls)),
+    path('', include(router.urls)),
 ]

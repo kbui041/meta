@@ -59,10 +59,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'hotel_booking_system.middleware.FaviconMiddleware',
     'hotel_booking_system.middleware.LoggingMiddleware',
-    'hotel_booking_system.middleware.AuthenticationMiddleware',
+    'hotel_booking_system.middleware.JWTAuthenticationMiddleware',
     'hotel_booking_system.middleware.JsonResponseMiddleware',
 ]
 
+SECRET_KEY = 'secret-key'
 ROOT_URLCONF = 'hotel_booking_system.urls'
 
 TEMPLATES = [
