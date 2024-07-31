@@ -1,67 +1,5 @@
-/* static/css/styles.css */
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f9;
-    text-align: center;
-}
-
-.container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 2rem;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: left;
-}
-
-h1, h2 {
-    color: #333;
-    text-align: center;
-}
-
-p {
-    color: #666;
-}
-
-.room-list {
-    display: flex;
-    overflow-x: auto; /* Enable horizontal scrolling */
-    padding: 1rem 0;
-    gap: 1rem; /* Space between cards */
-}
-
-.room-card {
-    min-width: 250px;
-    flex: 0 0 auto; /* Prevent the flex item from shrinking */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    overflow: hidden;
-    background-color: #fff;
-    text-align: left;
-}
-
-.room-card img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-}
-
-.room-info {
-    padding: 1rem;
-}
-
-.room-card h3 {
-    margin-top: 0;
-    color: #007BFF;
-    font-size: 1.1rem;
-}
-
-.room-card p {
-    margin: 0.5rem 0;
-    color: #555;
 }
 
 .footer {
@@ -70,40 +8,4 @@ p {
     background-color: #333;
     color: white;
     text-align: center;
-}
-
-/* Additional styles for the home page */
-.home-container {
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.nav-links {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.nav-links li {
-    margin: 0.5rem 0;
-}
-
-.nav-links a {
-    color: #007BFF;
-    text-decoration: none;
-    font-size: 1.2rem;
-    padding: 0.5rem 1rem;
-    border: 1px solid #007BFF;
-    border-radius: 4px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.nav-links a:hover {
-    background-color: #007BFF;
-    color: #fff;
 }

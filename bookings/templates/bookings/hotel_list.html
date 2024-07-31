@@ -5,27 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel List</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <h1>Explore Hotels in Vietnam</h1>
-    <p>Discover these popular destinations with lots to offer</p>
-    <div class="hotel-list">
-        {% for hotel in hotels %}
-            <div class="hotel-card">
-                <a href="{% url 'hotel_detail' hotel.id %}">
-                    <img src="{{ hotel.image_url }}" alt="{{ hotel.name }}">
-                </a>
-                <div class="hotel-info">
-                    <h3><a href="{% url 'hotel_detail' hotel.id %}">{{ hotel.name }}</a></h3>
-                    <p>{{ hotel.city }}</p>
-                    <p>{{ hotel.country }}</p>
+    <div class="container mt-5">
+        <h1 class="text-center">Explore Hotels in Vietnam</h1>
+        <p class="text-center">Discover these popular destinations with lots to offer</p>
+        <div class="row">
+            {% for hotel in hotels %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <a href="{% url 'hotel_detail' hotel.id %}">
+                        <img src="{{ hotel.image_url }}" class="card-img-top" alt="{{ hotel.name }}">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="{% url 'hotel_detail' hotel.id %}">{{ hotel.name }}</a></h5>
+                        <p class="card-text">{{ hotel.city }}, {{ hotel.country }}</p>
+                    </div>
                 </div>
             </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
-    <footer class="footer">
+    <footer class="footer text-center mt-5">
         <p>&copy; 2024 Hotel Booking System. All rights reserved.</p>
     </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
