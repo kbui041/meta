@@ -1,22 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- This sets the character encoding for the document to UTF-8 -->
     <meta charset="UTF-8">
+    <!-- The title of the page -->
     <title>Booking List</title>
 </head>
 <body>
+    <!-- Main heading of the page -->
     <h1>Bookings</h1>
+    
+    <!-- Unordered list to display each booking -->
     <ul>
+        <!-- Loop through each booking in the bookings list -->
         {% for booking in bookings %}
         <li>
+            <!-- Display the customer's username -->
             <strong>Customer:</strong> {{ booking.customer.user.username }}<br>
+            <!-- Display the customer's phone number -->
             <strong>Phone:</strong> {{ booking.customer.phone }}<br>
+            <!-- Display the customer's email -->
             <strong>Email:</strong> {{ booking.customer.email }}<br>
+            <!-- Display the room description -->
             <strong>Room:</strong> {{ booking.room.description }}<br>
+            <!-- Display the check-in date -->
             <strong>Check-in:</strong> {{ booking.check_in }}<br>
+            <!-- Display the check-out date -->
             <strong>Check-out:</strong> {{ booking.check_out }}<br>
+            <!-- Display the total price of the booking -->
             <strong>Total Price:</strong> {{ booking.total_price }}<br>
         </li>
+        <!-- If there are no bookings, display a message -->
         {% empty %}
         <li>No bookings available</li>
         {% endfor %}

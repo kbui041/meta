@@ -1,39 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- This sets the character encoding for the document to UTF-8 -->
     <meta charset="UTF-8">
+    <!-- The title of the page, dynamically showing the hotel's name -->
     <title>{{ hotel.name }}</title>
 </head>
 <body>
+    <!-- Main heading showing the hotel's name -->
     <h1>{{ hotel.name }}</h1>
+    
+    <!-- Paragraph showing the hotel's description, with a default message if no description is available -->
     <p>{{ hotel.description|default:"No description available" }}</p>
 
-
+    <!-- Subheading for the rooms section -->
     <h2>Rooms</h2>
+    <!-- Unordered list of rooms -->
     <ul>
+        <!-- Loop through each room in the rooms list -->
         {% for room in rooms %}
-        <li><a href="{% url 'room_detail' room.id %}">{{ room.name|default:"No description available" }}</a> - ${{ room.price }}</li>
+        <li>
+            <!-- Link to the room detail page, showing the room's name and price -->
+            <a href="{% url 'room_detail' room.id %}">{{ room.name|default:"No description available" }}</a> - ${{ room.price }}
+        </li>
+        <!-- If there are no rooms, display a message -->
         {% empty %}
         <li>No rooms available</li>
         {% endfor %}
     </ul>
 
+    <!-- Subheading for the contact information section -->
     <h2>Contact Information</h2>
+    <!-- Display the hotel's contact information -->
     <p><strong>Phone:</strong> {{ hotel.phone_number }}</p>
     <p><strong>Email:</strong> {{ hotel.email }}</p>
-    <p><strong>Address:</strong> {{hotel.address}}</p>
+    <p><strong>Address:</strong> {{ hotel.address }}</p>
 
+    <!-- Subheading for the reviews section -->
     <h2>Reviews</h2>
+    <!-- Unordered list of reviews -->
     <ul>
+        <!-- Loop through each review in the reviews list -->
         {% for review in reviews %}
         <li>
+            <!-- Display the reviewer's username, comment, and rating -->
             <strong>{{ review.customer.user.username }}:</strong> {{ review.comment }} ({{ review.rating }}/5)
         </li>
+        <!-- If there are no reviews, display a message -->
         {% empty %}
         <li>No reviews available</li>
         {% endfor %}
     </ul>
 
+    <!-- Link to add a new review for the hotel -->
     <a href="{% url 'add_review' hotel.id %}">Add a review</a>
 </body>
 </html>

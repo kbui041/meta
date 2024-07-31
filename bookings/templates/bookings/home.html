@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- This sets the character encoding for the document to UTF-8 -->
     <meta charset="UTF-8">
+    <!-- The title of the page -->
     <title>Hotel Booking System</title>
 </head>
 <body>
+    <!-- Main heading of the home page -->
     <h1>Welcome to the Hotel Booking System</h1>
+    
+    <!-- A brief introduction or description -->
     <p>This is the home page.</p>
+    
+    <!-- Unordered list of links to different sections of the system -->
     <ul>
+        <!-- Link to the hotel list page -->
         <li><a href="{% url 'hotel_list' %}">Hotel List</a></li>
+        <!-- Link to the booking list page -->
         <li><a href="{% url 'booking_list' %}">Booking List</a></li>
+        <!-- Link to the review list page -->
         <li><a href="{% url 'review_list' %}">Review List</a></li>
     </ul>
 </body>

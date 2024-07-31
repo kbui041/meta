@@ -1,19 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- This sets the character encoding for the document to UTF-8 -->
     <meta charset="UTF-8">
+    <!-- The title of the page -->
     <title>Review List</title>
 </head>
 <body>
+    <!-- Main heading of the page -->
     <h1>Review List</h1>
+    
+    <!-- Unordered list of reviews -->
     <ul>
+        <!-- Loop through each review in the reviews list -->
         {% for review in reviews %}
         <li>
+            <!-- Display the hotel's name -->
             <strong>Hotel:</strong> {{ review.hotel.name }}<br>
+            <!-- Display the customer's username -->
             <strong>Customer:</strong> {{ review.customer.user.username }}<br>
+            <!-- Display the rating given by the customer -->
             <strong>Rating:</strong> {{ review.rating }}<br>
+            <!-- Display the comment made by the customer -->
             <strong>Comment:</strong> {{ review.comment }}<br>
         </li>
+        <!-- If there are no reviews, display a message -->
         {% empty %}
         <li>No reviews available</li>
         {% endfor %}

@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- This sets the character encoding for the document to UTF-8 -->
     <meta charset="UTF-8">
+    <!-- The title of the page, dynamically showing the room's description -->
     <title>{{ room.description }}</title>
 </head>
 <body>
+    <!-- Main heading showing the room's name -->
     <h1>{{ room.name }}</h1>
+    
+    <!-- Paragraph showing the room's price -->
     <p>Price: {{ room.price }}</p>
+    
+    <!-- Paragraph showing the hotel's name with a link to the hotel's detail page -->
     <p>Hotel: <a href="{% url 'hotel_detail' room.hotel.id %}">{{ room.hotel.name }}</a></p>
 </body>
 </html>

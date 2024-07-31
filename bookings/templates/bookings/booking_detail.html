@@ -1,15 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- This sets the character encoding for the document to UTF-8 -->
     <meta charset="UTF-8">
+    <!-- The title of the page, dynamically showing the booking ID -->
     <title>Booking {{ booking.id }}</title>
 </head>
 <body>
+    <!-- Main heading showing the booking ID -->
     <h1>Booking {{ booking.id }}</h1>
+
+    <!-- Paragraph showing the customer's username -->
     <p>Customer: {{ booking.customer.user.username }}</p>
+    
+    <!-- Paragraph showing the room description -->
     <p>Room: {{ booking.room.description }}</p>
+    
+    <!-- Paragraph showing the check-in date -->
     <p>Check-in: {{ booking.check_in }}</p>
+    
+    <!-- Paragraph showing the check-out date -->
     <p>Check-out: {{ booking.check_out }}</p>
+    
+    <!-- Paragraph showing the total price of the booking -->
     <p>Total Price: {{ booking.total_price }}</p>
 </body>
 </html>

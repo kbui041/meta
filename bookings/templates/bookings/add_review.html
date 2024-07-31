@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- This sets the character encoding for the document to UTF-8 -->
     <meta charset="UTF-8">
+    <!-- This is the title that will appear in the browser tab -->
     <title>Add Review</title>
 </head>
 <body>
+    <!-- This is the main heading of the page, showing the hotel's name dynamically -->
     <h1>Add a Review for {{ hotel.name }}</h1>
+    
+    <!-- This is the form where users will submit their reviews -->
     <form method="post">
+        <!-- This ensures the form submission is secure -->
         {% csrf_token %}
+        
+        <!-- This displays the form fields nicely formatted -->
         {{ form.as_p }}
+        
+        <!-- This is the button that users will click to submit their review -->
         <button type="submit">Submit</button>
     </form>
 </body>

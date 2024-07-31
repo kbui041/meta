@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- This sets the character encoding for the document to UTF-8 -->
     <meta charset="UTF-8">
+    <!-- The title of the page -->
     <title>Hotel List</title>
 </head>
 <body>
+    <!-- Main heading of the page -->
     <h1>Hotels</h1>
+    
+    <!-- Unordered list of hotels -->
     <ul>
+        <!-- Loop through each hotel in the hotels list -->
         {% for hotel in hotels %}
-        <li><a href="{% url 'hotel_detail' hotel.id %}">{{ hotel.name }}</a></li>
+        <li>
+            <!-- Link to the hotel detail page, showing the hotel's name -->
+            <a href="{% url 'hotel_detail' hotel.id %}">{{ hotel.name }}</a>
+        </li>
+        <!-- If there are no hotels, display a message -->
         {% empty %}
         <li>No hotels available</li>
         {% endfor %}
