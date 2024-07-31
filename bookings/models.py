@@ -29,7 +29,7 @@ class HotelCategory(models.Model):
     def __str__(self):
         return self.name
 
-# Model for hotels
+
 class Hotel(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(default='Default Description')
@@ -40,9 +40,11 @@ class Hotel(models.Model):
     phone_number = models.CharField(max_length=20, default='000-000-0000')
     email = models.EmailField(default='default@example.com')
     category = models.ForeignKey(HotelCategory, on_delete=models.SET_NULL, null=True)
+    image_url = models.URLField(default='https://via.placeholder.com/150')  # URL field for image
 
     def __str__(self):
         return self.name
+
 
 # Model for rooms
 class Room(models.Model):
@@ -51,6 +53,7 @@ class Room(models.Model):
     description = models.TextField(default='Default Description')
     price = models.DecimalField(max_digits=10, decimal_places=2)
     available = models.BooleanField(default=True)
+    image_url = models.URLField(default = 'https://via.placeholder.com/150')
 
     def __str__(self):
         return self.name
@@ -92,6 +95,7 @@ class RoomImage(models.Model):
     def __str__(self):
         return f"Image for {self.room.name}"
 
+        
 # Model for room amenities
 class RoomAmenity(models.Model):
     room = models.ForeignKey(Room, related_name='amenities', on_delete=models.CASCADE)

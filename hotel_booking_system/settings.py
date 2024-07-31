@@ -51,12 +51,17 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',  # Clickjacking protection
     'hotel_booking_system.middleware.FaviconMiddleware',  # Custom favicon middleware
     'hotel_booking_system.middleware.LoggingMiddleware',  # Custom logging middleware
-    'hotel_booking_system.middleware.JWTAuthenticationMiddleware',  # Custom JWT authentication middleware
+    #'hotel_booking_system.middleware.JWTAuthenticationMiddleware',  # Custom JWT authentication middleware
     'hotel_booking_system.middleware.JsonResponseMiddleware',  # Custom JSON response middleware
 ]
 
 # Root URL configuration
 ROOT_URLCONF = 'hotel_booking_system.urls'
+
+# settings.py
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Template configuration
 TEMPLATES = [
@@ -86,6 +91,12 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',  # Database name
     }
 }
+
+# settings.py
+
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
