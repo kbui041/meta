@@ -1,33 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- This sets the character encoding for the document to UTF-8 -->
+    {% load static %}
     <meta charset="UTF-8">
-    <!-- The title of the page -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Review List</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
-<body>
-    <!-- Main heading of the page -->
-    <h1>Review List</h1>
-    
-    <!-- Unordered list of reviews -->
-    <ul>
-        <!-- Loop through each review in the reviews list -->
-        {% for review in reviews %}
-        <li>
-            <!-- Display the hotel's name -->
-            <strong>Hotel:</strong> {{ review.hotel.name }}<br>
-            <!-- Display the customer's username -->
-            <strong>Customer:</strong> {{ review.customer.user.username }}<br>
-            <!-- Display the rating given by the customer -->
-            <strong>Rating:</strong> {{ review.rating }}<br>
-            <!-- Display the comment made by the customer -->
-            <strong>Comment:</strong> {{ review.comment }}<br>
-        </li>
-        <!-- If there are no reviews, display a message -->
-        {% empty %}
-        <li>No reviews available</li>
-        {% endfor %}
-    </ul>
+<body class="d-flex flex-column min-vh-100">
+    <div class="container mt-5 flex-grow-1">
+        <h1 class="text-center">Review List</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <!-- List of reviews -->
+                <ul class="list-group">
+                    <!-- Loop through each review in the reviews list -->
+                    {% for review in reviews %}
+                    <li class="list-group-item mb-3">
+                        <strong>Hotel:</strong> {{ review.hotel.name }}<br>
+                        <strong>Customer:</strong> {{ review.customer.user.username }}<br>
+                        <strong>Rating:</strong> {{ review.rating }}<br>
+                        <strong>Comment:</strong> {{ review.comment }}<br>
+                    </li>
+                    <!-- If there are no reviews, display a message -->
+                    {% empty %}
+                    <li class="list-group-item">No reviews available</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <footer class="footer mt-auto py-3 bg-dark text-white text-center">
+        <p>&copy; 2024 Hotel Booking System. All rights reserved.</p>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -1,39 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- This sets the character encoding for the document to UTF-8 -->
+    {% load static %}
     <meta charset="UTF-8">
-    <!-- The title of the page -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking List</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
-<body>
-    <!-- Main heading of the page -->
-    <h1>Bookings</h1>
-    
-    <!-- Unordered list to display each booking -->
-    <ul>
-        <!-- Loop through each booking in the bookings list -->
-        {% for booking in bookings %}
-        <li>
-            <!-- Display the customer's username -->
-            <strong>Customer:</strong> {{ booking.customer.user.username }}<br>
-            <!-- Display the customer's phone number -->
-            <strong>Phone:</strong> {{ booking.customer.phone }}<br>
-            <!-- Display the customer's email -->
-            <strong>Email:</strong> {{ booking.customer.email }}<br>
-            <!-- Display the room description -->
-            <strong>Room:</strong> {{ booking.room.description }}<br>
-            <!-- Display the check-in date -->
-            <strong>Check-in:</strong> {{ booking.check_in }}<br>
-            <!-- Display the check-out date -->
-            <strong>Check-out:</strong> {{ booking.check_out }}<br>
-            <!-- Display the total price of the booking -->
-            <strong>Total Price:</strong> {{ booking.total_price }}<br>
-        </li>
-        <!-- If there are no bookings, display a message -->
-        {% empty %}
-        <li>No bookings available</li>
-        {% endfor %}
-    </ul>
+<body class="d-flex flex-column min-vh-100">
+    <div class="container mt-5 flex-grow-1">
+        <h1 class="text-center">Bookings</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <!-- List of bookings -->
+                <ul class="list-group">
+                    <!-- Loop through each booking in the bookings list -->
+                    {% for booking in bookings %}
+                    <li class="list-group-item mb-3">
+                        <strong>Customer:</strong> {{ booking.customer.user.username }}<br>
+                        <strong>Phone:</strong> {{ booking.customer.phone }}<br>
+                        <strong>Email:</strong> {{ booking.customer.email }}<br>
+                        <strong>Room:</strong> {{ booking.room.description }}<br>
+                        <strong>Check-in:</strong> {{ booking.check_in }}<br>
+                        <strong>Check-out:</strong> {{ booking.check_out }}<br>
+                        <strong>Total Price:</strong> {{ booking.total_price }}<br>
+                    </li>
+                    <!-- If there are no bookings, display a message -->
+                    {% empty %}
+                    <li class="list-group-item">No bookings available</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <footer class="footer mt-auto py-3 bg-dark text-white text-center">
+        <p>&copy; 2024 Hotel Booking System. All rights reserved.</p>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

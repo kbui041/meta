@@ -3,9 +3,24 @@ body {
 }
 
 .footer {
-    margin-top: 2rem;
-    padding: 1rem;
     background-color: #333;
     color: white;
     text-align: center;
+    padding: 1rem;
+}
+
+.room-list {
+    display: flex;
+    overflow-x: auto;
+    padding: 1rem;
+}
+
+.room-list .card {
+    flex: 0 0 auto;
+    margin-right: 1rem;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
 }

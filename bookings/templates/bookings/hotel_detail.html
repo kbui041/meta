@@ -3,39 +3,37 @@
 <head>
     {% load static %}
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ hotel.name }}</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
-<body>
-    <div class="container mt-5">
+<body class="d-flex flex-column min-vh-100">
+    <div class="container mt-5 flex-grow-1">
         <h1 class="text-center">{{ hotel.name }}</h1>
         <p class="text-center">{{ hotel.description|default:"No description available" }}</p>
-
-        <h2 class="mt-4">Rooms</h2>
-        <div class="row">
+        
+        <h2 class="mt-5">Rooms</h2>
+        <div class="room-list d-flex overflow-auto">
             {% for room in rooms %}
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <img src="{{ room.image_url }}" class="card-img-top" alt="{{ room.name }}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ room.name }}</h5>
-                        <p class="card-text">${{ room.price }} per night</p>
-                    </div>
+            <div class="card m-2" style="min-width: 250px;">
+                <img src="{{ room.image_url }}" class="card-img-top" alt="{{ room.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ room.name }}</h5>
+                    <p class="card-text">${{ room.price }} per night</p>
                 </div>
             </div>
-            {% endfor %}
-            {% if not rooms %}
+            {% empty %}
             <p>No rooms available</p>
-            {% endif %}
+            {% endfor %}
         </div>
 
-        <h2 class="mt-4">Contact Information</h2>
+        <h2 class="mt-5">Contact Information</h2>
         <p><strong>Phone:</strong> {{ hotel.phone_number }}</p>
         <p><strong>Email:</strong> {{ hotel.email }}</p>
         <p><strong>Address:</strong> {{ hotel.address }}</p>
 
-        <h2 class="mt-4">Reviews</h2>
+        <h2 class="mt-5">Reviews</h2>
         <ul class="list-group">
             {% for review in reviews %}
             <li class="list-group-item">
@@ -45,10 +43,9 @@
             <li class="list-group-item">No reviews available</li>
             {% endfor %}
         </ul>
-
-        <a href="{% url 'add_review' hotel.id %}" class="btn btn-primary mt-4">Add a review</a>
+        <a href="{% url 'add_review' hotel.id %}" class="btn btn-primary mt-3">Add a review</a>
     </div>
-    <footer class="footer text-center mt-5">
+    <footer class="footer mt-auto py-3 bg-dark text-white text-center">
         <p>&copy; 2024 Hotel Booking System. All rights reserved.</p>
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
