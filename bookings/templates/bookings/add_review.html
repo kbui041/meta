@@ -4,28 +4,37 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Review</title>
+    <title>Add Review for {{ hotel.name }}</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body class="d-flex flex-column min-vh-100">
     <div class="container mt-5 flex-grow-1">
-        <h1 class="text-center">Add a Review for {{ hotel.name }}</h1>
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <form method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
-                </form>
-            </div>
-        </div>
+        <h1 class="display-4">Add Review for {{ hotel.name }}</h1>
+        <form id="reviewForm" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Submit Review</button>
+        </form>
+        <p id="ratingMessage" class="mt-3"></p>
     </div>
+
     <footer class="footer mt-auto py-3 bg-dark text-white text-center">
         <p>&copy; 2024 Hotel Booking System. All rights reserved.</p>
     </footer>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('reviewForm').addEventListener('submit', function(event) {
+            const rating = document.getElementById('id_rating').value;
+            if (rating < 1 || rating > 5) {
+                event.preventDefault();
+                document.getElementById('ratingMessage').textContent = 'Rating must be between 1 and 5';
+                document.getElementById('ratingMessage').style.color = 'red';
+            }
+        });
+    </script>
 </body>
 </html>

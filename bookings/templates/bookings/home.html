@@ -4,31 +4,41 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Booking System</title>
+    <title>{% block title %}Hotel Booking System{% endblock %}</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body class="d-flex flex-column min-vh-100">
-    <div class="container mt-5 flex-grow-1 text-center">
-        <h1 class="display-4">Welcome to the Hotel Booking System</h1>
-        <p class="lead">This is the home page.</p>
-        <ul class="nav justify-content-center">
-            <li class="nav-item">
-                <a class="nav-link btn btn-primary mx-2" href="{% url 'hotel_list' %}">Hotel List</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link btn btn-primary mx-2" href="{% url 'booking_list' %}">Booking List</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link btn btn-primary mx-2" href="{% url 'review_list' %}">Review List</a>
-            </li>
-        </ul>
-    </div>
+    <header>
+        <div class="container mt-5 flex-grow-1 text-center">
+            <h1 class="display-4">Welcome to the Hotel Booking System</h1>
+            <p class="lead">This is the home page.</p>
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link btn btn-primary mx-2" href="{% url 'hotel_list' %}">Hotel List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-primary mx-2" href="{% url 'booking_list' %}">Booking List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-primary mx-2" href="{% url 'review_list' %}">Review List</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="container flex-grow-1">
+        {% block content %}{% endblock %}
+    </main>
+
     <footer class="footer mt-auto py-3 bg-dark text-white text-center">
         <p>&copy; 2024 Hotel Booking System. All rights reserved.</p>
     </footer>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    {% block scripts %}{% endblock %}
 </body>
 </html>

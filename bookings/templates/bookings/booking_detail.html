@@ -1,28 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- This sets the character encoding for the document to UTF-8 -->
+    {% load static %}
     <meta charset="UTF-8">
-    <!-- The title of the page, dynamically showing the booking ID -->
-    <title>Booking {{ booking.id }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation - Booking {{ booking.id }}</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
-<body>
-    <!-- Main heading showing the booking ID -->
-    <h1>Booking {{ booking.id }}</h1>
+<body class="d-flex flex-column min-vh-100">
+    <div class="container mt-5 flex-grow-1">
+        <h1 class="display-4">Booking Confirmation</h1>
+        <div class="card mt-3">
+            <div class="card-body">
+                <h2 class="card-title">Booking #{{ booking.id }}</h2>
+                <p class="card-text"><strong>Customer:</strong> {{ booking.customer.user.username }}</p>
+                <p class="card-text"><strong>Phone:</strong> {{ booking.customer.phone }}</p>
+                <p class="card-text"><strong>Email:</strong> {{ booking.customer.email }}</p>
+                <p class="card-text"><strong>Room:</strong> {{ booking.room.name }}</p>
+                <p class="card-text"><strong>Description:</strong> {{ booking.room.description }}</p>
+                <p class="card-text"><strong>Check-in:</strong> {{ booking.check_in }}</p>
+                <p class="card-text"><strong>Check-out:</strong> {{ booking.check_out }}</p>
+                <p class="card-text"><strong>Total Price:</strong> ${{ booking.total_price }}</p>
+            </div>
+        </div>
+        <a href="{% url 'home' %}" class="btn btn-primary mt-3">Back to Home</a>
+    </div>
 
-    <!-- Paragraph showing the customer's username -->
-    <p>Customer: {{ booking.customer.user.username }}</p>
+    <footer class="footer mt-auto py-3 bg-dark text-white text-center">
+        <p>&copy; 2024 Hotel Booking System. All rights reserved.</p>
+    </footer>
     
-    <!-- Paragraph showing the room description -->
-    <p>Room: {{ booking.room.description }}</p>
-    
-    <!-- Paragraph showing the check-in date -->
-    <p>Check-in: {{ booking.check_in }}</p>
-    
-    <!-- Paragraph showing the check-out date -->
-    <p>Check-out: {{ booking.check_out }}</p>
-    
-    <!-- Paragraph showing the total price of the booking -->
-    <p>Total Price: {{ booking.total_price }}</p>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>

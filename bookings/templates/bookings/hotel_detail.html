@@ -1,55 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% load static %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ hotel.name }}</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-<body class="d-flex flex-column min-vh-100">
-    <div class="container mt-5 flex-grow-1">
-        <h1 class="text-center">{{ hotel.name }}</h1>
-        <p class="text-center">{{ hotel.description|default:"No description available" }}</p>
-        
-        <h2 class="mt-5">Rooms</h2>
-        <div class="room-list d-flex overflow-auto">
-            {% for room in rooms %}
-            <div class="card m-2" style="min-width: 250px;">
-                <img src="{{ room.image_url }}" class="card-img-top" alt="{{ room.name }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ room.name }}</h5>
-                    <p class="card-text">${{ room.price }} per night</p>
-                </div>
+{% extends "bookings/home.html" %}
+
+{% block title %}{{ hotel.name }} - Hotel Booking System{% endblock %}
+
+{% block content %}
+    <h1 class="display-4">{{ hotel.name }}</h1>
+    <p class="lead">{{ hotel.description }}</p>
+
+    <div class="mt-5">
+        <h2>Reviews</h2>
+        {% for review in reviews %}
+            <div class="review">
+                <p><strong>{{ review.customer.user.username }}</strong>: {{ review.comment }}</p>
             </div>
-            {% empty %}
-            <p>No rooms available</p>
-            {% endfor %}
-        </div>
-
-        <h2 class="mt-5">Contact Information</h2>
-        <p><strong>Phone:</strong> {{ hotel.phone_number }}</p>
-        <p><strong>Email:</strong> {{ hotel.email }}</p>
-        <p><strong>Address:</strong> {{ hotel.address }}</p>
-
-        <h2 class="mt-5">Reviews</h2>
-        <ul class="list-group">
-            {% for review in reviews %}
-            <li class="list-group-item">
-                <strong>{{ review.customer.user.username }}:</strong> {{ review.comment }} ({{ review.rating }}/5)
-            </li>
-            {% empty %}
-            <li class="list-group-item">No reviews available</li>
-            {% endfor %}
-        </ul>
-        <a href="{% url 'add_review' hotel.id %}" class="btn btn-primary mt-3">Add a review</a>
+        {% endfor %}
+        <a href="{% url 'add_review' hotel.id %}" class="btn btn-primary mt-3">Add Review</a>
     </div>
-    <footer class="footer mt-auto py-3 bg-dark text-white text-center">
-        <p>&copy; 2024 Hotel Booking System. All rights reserved.</p>
-    </footer>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+
+    <div class="mt-5">
+        <h2>Make a Reservation</h2>
+        <form id="reservationForm" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="room">Room:</label>
+                <select class="form-control" id="room" name="room" required>
+                    {% for room in rooms %}
+                        <option value="{{ room.id }}">{{ room.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="check_in">Check in:</label>
+                <input type="date" class="form-control" id="check_in" name="check_in" required>
+            </div>
+            <div class="form-group">
+                <label for="check_out">Check out:</label>
+                <input type="date" class="form-control" id="check_out" name="check_out" required>
+            </div>
+            <button type="submit" class="btn btn-primary" id="submitButton">Submit</button>
+        </form>
+        <p id="confirmationMessage" class="mt-3"></p>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.getElementById('reservationForm').addEventListener('submit', function(event) {
+        let room = document.getElementById('room').value;
+        let checkIn = document.getElementById('check_in').value;
+        let checkOut = document.getElementById('check_out').value;
+        if (!room || !checkIn || !checkOut) {
+            event.preventDefault();
+            document.getElementById('confirmationMessage').textContent = 'Please fill out all fields.';
+            document.getElementById('confirmationMessage').style.color = 'red';
+        }
+    });
+</script>
+{% endblock %}
