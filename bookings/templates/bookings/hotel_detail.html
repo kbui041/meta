@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel Detail</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -12,14 +13,12 @@
         <h1 id="hotel-name" class="display-4"></h1>
         <p id="hotel-description" class="lead"></p>
 
-        <!-- Reviews -->
         <div class="mt-5">
             <h2>Reviews</h2>
             <div id="reviews"></div>
             <button class="btn btn-primary mt-3" id="add-review-btn">Add Review</button>
         </div>
 
-        <!-- Booking Form -->
         <div class="mt-5">
             <h2>Make a Reservation</h2>
             <form id="reservationForm">
@@ -48,9 +47,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <!-- Correctly pass the hotel_id to JavaScript -->
+    <script type="application/json" id="hotel-id-script">
+        {"hotel_id": "{{ hotel_id }}"}
+    </script>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const hotelId = {{ hotel_id }}; // Assume you pass the hotel ID from the server
+            const hotelIdScript = document.getElementById('hotel-id-script').textContent;
+            const hotelId = JSON.parse(hotelIdScript).hotel_id;
 
             // Fetch hotel details
             fetch(`/api/hotels/${hotelId}/`)
@@ -64,83 +70,38 @@
             fetch(`/api/rooms/?hotel=${hotelId}`)
                 .then(response => response.json())
                 .then(data => {
-                    const roomSelect = document.getElementById('room');
-                    data.forEach(room => {
-                        const option = document.createElement('option');
-                        option.value = room.id;
-                        option.textContent = room.name;
-                        roomSelect.appendChild(option);
-                    });
+                    console.log("Rooms data:", data); // Log the data to debug
+                    if (Array.isArray(data)) {
+                        const roomSelect = document.getElementById('room');
+                        data.forEach(room => {
+                            const option = document.createElement('option');
+                            option.value = room.id;
+                            option.textContent = room.name;
+                            roomSelect.appendChild(option);
+                        });
+                    } else {
+                        console.error("Expected an array of rooms but got:", data);
+                    }
                 });
 
             // Fetch reviews for the hotel
             fetch(`/api/reviews/?hotel=${hotelId}`)
                 .then(response => response.json())
                 .then(data => {
-                    const reviewsDiv = document.getElementById('reviews');
-                    data.forEach(review => {
-                        const reviewDiv = document.createElement('div');
-                        reviewDiv.className = 'review';
-                        reviewDiv.innerHTML = `<p><strong>${review.customer.user.username}</strong>: ${review.comment}</p>`;
-                        reviewsDiv.appendChild(reviewDiv);
-                    });
-                });
-
-            // Handle form submission
-            document.getElementById('reservationForm').addEventListener('submit', function(event) {
-                event.preventDefault();
-
-                const room = document.getElementById('room').value;
-                const checkIn = document.getElementById('check_in').value;
-                const checkOut = document.getElementById('check_out').value;
-
-                const bookingData = {
-                    customer: 1, // Assuming you get customer ID from session or a similar mechanism
-                    room: room,
-                    check_in: checkIn,
-                    check_out: checkOut,
-                    total_price: calculateTotalPrice(room, checkIn, checkOut) // Implement this function based on your logic
-                };
-
-                fetch('/api/bookings/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': getCookie('csrftoken') // Implement getCookie function to get CSRF token
-                    },
-                    body: JSON.stringify(bookingData)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('confirmationMessage').textContent = 'Booking successful!';
-                    document.getElementById('confirmationMessage').style.color = 'green';
-                })
-                .catch(error => {
-                    document.getElementById('confirmationMessage').textContent = 'Error booking the room.';
-                    document.getElementById('confirmationMessage').style.color = 'red';
-                });
-            });
-        });
-
-        function calculateTotalPrice(roomId, checkIn, checkOut) {
-            // Implement your logic to calculate total price based on room and dates
-            return 100; // Placeholder value
-        }
-
-        function getCookie(name) {
-            let cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                const cookies = document.cookie.split(';');
-                for (let i = 0; i < cookies.length; i++) {
-                    const cookie = cookies[i].trim();
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
+                    console.log("Reviews data:", data); // Log the data to debug
+                    if (Array.isArray(data)) {
+                        const reviewsDiv = document.getElementById('reviews');
+                        data.forEach(review => {
+                            const reviewDiv = document.createElement('div');
+                            reviewDiv.className = 'review';
+                            reviewDiv.innerHTML = `<p><strong>${review.customer.user.username}</strong>: ${review.comment}</p>`;
+                            reviewsDiv.appendChild(reviewDiv);
+                        });
+                    } else {
+                        console.error("Expected an array of reviews but got:", data);
                     }
-                }
-            }
-            return cookieValue;
-        }
+                });
+        });
     </script>
 </body>
 </html>
