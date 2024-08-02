@@ -1,5 +1,3 @@
-# bookings/models.py
-
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
@@ -30,7 +28,6 @@ class HotelCategory(models.Model):
     def __str__(self):
         return self.name
 
-
 class Hotel(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(default='Default Description')
@@ -46,7 +43,6 @@ class Hotel(models.Model):
     def __str__(self):
         return self.name
 
-
 # Model for rooms
 class Room(models.Model):
     hotel = models.ForeignKey(Hotel, related_name='rooms', on_delete=models.CASCADE)
@@ -54,7 +50,7 @@ class Room(models.Model):
     description = models.TextField(default='Default Description')
     price = models.DecimalField(max_digits=10, decimal_places=2)
     available = models.BooleanField(default=True)
-    image_url = models.URLField(default = 'https://via.placeholder.com/150')
+    image_url = models.URLField(default='https://via.placeholder.com/150')
 
     def __str__(self):
         return self.name
@@ -77,9 +73,10 @@ class Review(models.Model):
     rating = models.IntegerField()
     comment = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Review by {self.customer} for hotel {self.hotel.name}"
+        return f"Review by {self.customer.user.username} for hotel {self.hotel.name}"
 
     def clean(self):
         if not (1 <= self.rating <= 5):
@@ -100,7 +97,6 @@ class RoomImage(models.Model):
     def __str__(self):
         return f"Image for {self.room.name}"
 
-        
 # Model for room amenities
 class RoomAmenity(models.Model):
     room = models.ForeignKey(Room, related_name='amenities', on_delete=models.CASCADE)

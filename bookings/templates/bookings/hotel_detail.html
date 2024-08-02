@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel Detail</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-<<<<<<< HEAD
     {% load static %}
-=======
-    {% load static%}
->>>>>>> 33c7a85dbd29679fb1c6ecc5cc989f4905a55c60
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -92,17 +88,19 @@
             fetch(`/api/reviews/?hotel=${hotelId}`)
                 .then(response => response.json())
                 .then(data => {
-                    console.log("Reviews data:", data); // Log the data to debug
-                    if (Array.isArray(data)) {
+                    //console.log(typeof data);
+                    const result = JSON.parse(data)
+                    console.log("Reviews data:", result); 
+                    if (Array.isArray(result)) {
                         const reviewsDiv = document.getElementById('reviews');
-                        data.forEach(review => {
+                        result.forEach(review => {
                             const reviewDiv = document.createElement('div');
                             reviewDiv.className = 'review';
                             reviewDiv.innerHTML = `<p><strong>${review.customer.user.username}</strong>: ${review.comment}</p>`;
                             reviewsDiv.appendChild(reviewDiv);
                         });
                     } else {
-                        console.error("Expected an array of reviews but got:", data);
+                        console.error("Expected an array of reviews but got:", result);
                     }
                 });
         });
